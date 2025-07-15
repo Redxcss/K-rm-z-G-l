@@ -121,17 +121,6 @@
   .proposal-text.visible {
     opacity: 1;
   }
-
-  /* Gizli YouTube iframe için */
-  #youtubePlayer {
-    width: 0;
-    height: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    opacity: 0;
-  }
 </style>
 </head>
 <body>
@@ -173,64 +162,21 @@
 
 <div class="proposal-text" id="proposalText" aria-live="polite" role="alert">Benimle çıkar mısın?</div>
 
-<!-- YouTube API iframe container -->
-<div id="youtubePlayer"></div>
+<audio id="violinAudio" src="audio/violin.mp3" preload="auto" loop></audio>
 
 <script>
   const box = document.getElementById('box');
   const proposalText = document.getElementById('proposalText');
+  const violinAudio = document.getElementById('violinAudio');
   let opened = false;
-  let player;
 
-  // YouTube API yükleniyor
-  function loadYouTubeAPI() {
-    return new Promise((resolve) => {
-      if (window.YT && window.YT.Player) {
-        resolve();
-      } else {
-        let tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(tag);
-        window.onYouTubeIframeAPIReady = () => resolve();
-      }
-    });
-  }
-
-  async function openBox() {
+  function openBox() {
     if (opened) return;
     opened = true;
     box.classList.add('open');
-
-    // YouTube API hazır olunca oynatıcıyı oluştur
-    await loadYouTubeAPI();
-
-    player = new YT.Player('youtubePlayer', {
-      height: '0',
-      width: '0',
-      videoId: 'I6QIC2Nf7bY', // Romantik keman müziği YouTube video ID
-      playerVars: {
-        autoplay: 1,
-        controls: 0,
-        loop: 1,
-        playlist: 'I6QIC2Nf7bY',
-        modestbranding: 1,
-        fs: 0,
-        rel: 0,
-        showinfo: 0,
-        disablekb: 1,
-        iv_load_policy: 3,
-        mute: 0
-      },
-      events: {
-        onReady: (event) => {
-          event.target.playVideo().catch(() => {
-            console.log("Otomatik oynatma engellendi, kullanıcı etkileşimi gerekebilir.");
-          });
-        }
-      }
+    violinAudio.play().catch(() => {
+      console.log('Ses çalınamadı, kullanıcı etkileşimi gerekebilir.');
     });
-
-    // Yazıyı hemen biraz daha erken göster
     setTimeout(() => {
       proposalText.classList.add('visible');
     }, 700);
