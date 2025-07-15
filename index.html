@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gül Buketi Kutusu</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="box-container" id="box" role="button" tabindex="0" aria-label="Gül buketi kutusu, tıklayın">
+  <div class="box-lid"></div>
+  <div class="box-bottom"></div>
+
+  <div class="bouquet-container" aria-hidden="true">
+    <svg class="flower-svg flower1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="petalGradient1" cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stop-color="#ff4d4d"/>
+          <stop offset="70%" stop-color="#b20000"/>
+          <stop offset="100%" stop-color="#7a0000"/>
+        </radialGradient>
+        <radialGradient id="leafGradient1" cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stop-color="#5c9e3b"/>
+          <stop offset="100%" stop-color="#2b5c14"/>
+        </radialGradient>
+        <filter id="glowRed1" x="-50%" y="-50%" width="200%" height="200%" >
+          <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ff3333" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <g filter="url(#glowRed1)">
+        <ellipse cx="32" cy="30" rx="14" ry="18" fill="url(#petalGradient1)" />
+        <ellipse cx="42" cy="20" rx="12" ry="14" fill="url(#petalGradient1)" transform="rotate(20 42 20)" />
+        <ellipse cx="22" cy="20" rx="12" ry="14" fill="url(#petalGradient1)" transform="rotate(-20 22 20)" />
+        <ellipse cx="32" cy="22" rx="10" ry="14" fill="#ff6666" />
+        <ellipse cx="32" cy="24" rx="7" ry="10" fill="#ff1a1a" />
+        <circle cx="32" cy="28" r="4" fill="#b20000" />
+      </g>
+      <rect x="30" y="44" width="4" height="18" fill="url(#leafGradient1)" rx="1" />
+      <path d="M30 44 L26 54 L28 56 L30 52 L32 56 L34 54 L30 44 Z" fill="url(#leafGradient1)" />
+    </svg>
+    <div class="stem"></div>
+  </div>
+</div>
+
+<div class="proposal-text" id="proposalText" aria-live="polite" role="alert">Benimle çıkar mısın?</div>
+
+<audio id="violinAudio" preload="auto" loop>
+  <source src="audio/violin.mp3" type="audio/mpeg" />
+  Tarayıcınız audio elementini desteklemiyor.
+</audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
